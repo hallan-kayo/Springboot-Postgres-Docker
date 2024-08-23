@@ -1,0 +1,31 @@
+version: "3.8" # Versão do Compose
+
+services:
+  backend: # Nome do serviço do backend
+    build: # Constrói a imagem a partir do Dockerfile
+      context: . # Diretório do projeto
+      dockerfile: Dockerfile
+    container_name: backend # Nome do container
+    ports:
+      - "8080:8080" # Mapeamento de portas
+    depends_on:
+      - database # O serviço app depende do serviço database
+    environment: # Variáveis de ambiente para a aplicação
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgresdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  database: # Serviço do banco de dados PostgreSQL
+    image: postgres:16.4 # Versão da imagem do PostgreSQL
+    container_name: postgres_db # Nome do container
+    ports:
+      - "5433:5432" # Mapeamento da porta do PostgreSQL
+    environment:
+      POSTGRES_DB: postgresdb # Nome do banco de dados
+      POSTGRES_USER: postgres # Usuário do banco de dados
+      POSTGRES_PASSWORD: postgres # Senha do banco de dados
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistência de dados
+
+volumes:
+  postgres_data: # Volume nomeado para armazenar os dados do PostgreSQL
