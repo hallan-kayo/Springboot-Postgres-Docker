@@ -11,7 +11,7 @@ services:
     depends_on:
       - database # O serviço app depende do serviço database
     environment: # Variáveis de ambiente para a aplicação
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgresdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgresdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
 
@@ -19,7 +19,7 @@ services:
     image: postgres:16.4 # Versão da imagem do PostgreSQL
     container_name: postgres_db # Nome do container
     ports:
-      - "5433:5432" # Mapeamento da porta do PostgreSQL
+      - "5432:5432" # Mapeamento da porta do PostgreSQL
     environment:
       POSTGRES_DB: postgresdb # Nome do banco de dados
       POSTGRES_USER: postgres # Usuário do banco de dados
