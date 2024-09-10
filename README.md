@@ -24,13 +24,17 @@ Follow these steps to build and run the Docker containers for the Spring Boot ap
    ```bash
    cd Springboot-Postgres-Docker
 
-3. **Compile the project using Maven:**
+3. **up the database container:**
+   ```bash
+   docker-compose up -d database
+
+4. **Compile the project using Maven:**
    ```bash
    mvn clean package
 
-4. **Build and run the Docker containers:**
+5. **up the backend container:**
    ```bash
-   docker-compose up --build -d
+   docker-compose up -d backend
 
 5. **Verify that the containers are running:**
    ```bash
